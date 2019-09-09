@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title data-th-text="${title}"></title>
+  </head>
+  <body class="container" data-portal-component-type="page">
+    <div class="py-2">
+      <h2 class="text-center" data-th-text="${title}"></h2>
+      <h6 class="text-center text-secondary">
+        by <a data-th-href="${authorUrl}" data-th-text="${author}"></a>
+      </h6>
+      <img
+        class="card-img"
+        data-th-src="${portal.imageUrl({'_id=' + photo, '_scale=width(800)'})}"
+        data-th-alt-title="${title}"
+      />
+      <p class="h4 py-3">
+        <strong><em data-th-text="${intro}"></em></strong>
+      </p>
+      <div class="row">
+        <div class="col-xs-12 col-sm-4" data-portal-region="left">
+          <div
+            data-th-if="${leftRegion}"
+            data-th-each="component : ${leftRegion.components}"
+            data-th-remove="tag"
+          >
+            <div
+              data-portal-component="${component.path}"
+              data-th-remove="tag"
+            ></div>
+          </div>
+        </div>
+        <div class="col-xs-12 col-sm-8" data-portal-region="right">
+          <div
+            data-th-if="${rightRegion}"
+            data-th-each="component : ${rightRegion.components}"
+            data-th-remove="tag"
+          >
+            <div
+              data-portal-component="${component.path}"
+              data-th-remove="tag"
+            ></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

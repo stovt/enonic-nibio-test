@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+  <form>
+    <field-set name="menu">
+      <label>Menu</label>
+      <items>
+        <input name="menuItems" type="ContentSelector">
+          <label>Menu items</label>
+          <occurrences minimum="0" maximum="0"/>
+        </input>
+        <item-set name="menuLinks">
+          <label>Menu Links</label>
+          <items>
+            <input name="title" type="TextLine">
+              <label>Title</label>
+              <occurrences minimum="1" maximum="1"/>
+            </input>
+            <input name="url" type="TextLine">
+              <label>URL</label>
+              <occurrences minimum="1" maximum="1"/>
+            </input>
+          </items>
+          <occurrences minimum="0" maximum="0"/>
+        </item-set>
+      </items>
+    </field-set>
+  </form>
+</site>

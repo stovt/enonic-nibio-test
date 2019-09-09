@@ -1,0 +1,83 @@
+<content-type>
+  <display-name>Project</display-name>
+  <super-type>base:structured</super-type>
+  <form>
+    <input type="ImageSelector" name="photo">
+      <label>Photo</label>
+      <occurrences minimum="1" maximum="1"/>
+    </input>
+    <input type="TextArea" name="intro">
+      <label>Intro</label>
+      <occurrences minimum="1" maximum="1"/>
+    </input>
+    <input type="Date" name="startDate">
+      <label>Start Date</label>
+      <occurrences minimum="1" maximum="1"/>
+    </input>
+    <input type="Date" name="endDate">
+      <label>End Date</label>
+      <occurrences minimum="1" maximum="1"/>
+    </input>
+    <input type="Date" name="updatedDate">
+      <label>Updated Date</label>
+      <occurrences minimum="1" maximum="1"/>
+    </input>
+    <item-set name="users">
+      <label>Participants</label>
+      <items>
+        <input type="ContentSelector" name="user">
+          <label>User</label>
+          <occurrences minimum="0" maximum="1"/>
+          <config>
+            <allowContentType>person</allowContentType>
+          </config>
+        </input>
+        <input type="TextLine" name="userName">
+          <label>Exteranl user name</label>
+          <occurrences minimum="0" maximum="1"/>
+        </input>
+        <input type="ComboBox" name="role">
+          <label>Role</label>
+          <occurrences minimum="1" maximum="1"/>
+          <config>
+            <option value="manager">Manager</option>
+            <option value="localManager">Local manager</option>
+            <option value="participant">Participant</option>
+          </config>
+        </input>
+      </items>
+      <occurrences minimum="1" maximum="0"/>
+    </item-set>
+    <input type="ContentSelector" name="division">
+      <label>Division</label>
+      <occurrences minimum="1" maximum="1"/>
+      <config>
+        <allowContentType>division</allowContentType>
+      </config>
+    </input>
+    <input type="ContentSelector" name="department">
+      <label>Department</label>
+      <occurrences minimum="1" maximum="1"/>
+      <config>
+        <allowContentType>department</allowContentType>
+      </config>
+    </input>
+    <field-set>
+      <label>Table data</label>
+      <items>
+        <input type="TextLine" name="partners">
+          <label>Partners</label>
+          <occurrences minimum="0" maximum="1"/>
+        </input>
+        <input type="TextLine" name="totalBudget">
+          <label>Total budget</label>
+          <occurrences minimum="0" maximum="1"/>
+        </input>
+        <input type="TextLine" name="fundingSource">
+          <label>Funding source</label>
+          <occurrences minimum="0" maximum="1"/>
+        </input>
+      </items>
+    </field-set>
+  </form>
+</content-type>

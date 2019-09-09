@@ -1,0 +1,19 @@
+<part>
+  <display-name>Links</display-name>
+  <form>
+    <item-set name="links">
+      <label>Links</label>
+      <items>
+        <input type="TextLine" name="title">
+          <label>Title</label>
+          <occurrences minimum="1" maximum="1"/>
+        </input>
+        <input type="TextLine" name="url">
+          <label>Url</label>
+          <occurrences minimum="1" maximum="1"/>
+        </input>
+      </items>
+      <occurrences minimum="1" maximum="0"/>
+    </item-set>
+  </form>
+</part>

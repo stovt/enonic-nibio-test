@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title data-th-text="${title}"></title>
+  </head>
+  <body class="container" data-portal-component-type="page">
+    <div class="py-2">
+      <h2 class="text-center" data-th-text="${title}"></h2>
+      <h6 class="text-center text-secondary">
+        <span
+          data-th-class="${active ? 'text-success' : 'text-danger'}"
+          data-th-text="${active ? 'Active' : 'Inactive'}"
+        ></span>
+        LAST UPDATED: <span data-th-text="${updatedDate}"></span> END:
+        <span data-th-text="${endDate}"></span> START:
+        <span data-th-text="${startDate}"></span>
+      </h6>
+      <img
+        class="card-img"
+        data-th-src="${portal.imageUrl({'_id=' + photo, '_scale=width(800)'})}"
+        data-th-alt-title="${title}"
+      />
+      <p class="h4 py-3">
+        <strong><em data-th-text="${intro}"></em></strong>
+      </p>
+      <div class="row">
+        <div class="col-xs-12 col-sm-4">
+          <ul class="list-group">
+            <li class="list-group-item" data-th-each="user : ${users}">
+              <a
+                data-th-if="${user.url}"
+                data-th-href="${user.url}"
+                data-th-text="${user.fullName}"
+              ></a>
+              <span
+                data-th-unless="${user.url}"
+                data-th-text="${user.fullName}"
+                data-th-remove="tag"
+              ></span>
+            </li>
+          </ul>
+          <div data-portal-region="left">
+            <div
+              data-th-if="${leftRegion}"
+              data-th-each="component : ${leftRegion.components}"
+              data-th-remove="tag"
+            >
+              <div
+                data-portal-component="${component.path}"
+                data-th-remove="tag"
+              ></div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-12 col-sm-8">
+          <table class="table table-sm">
+            <tbody>
+              <tr>
+                <th scope="row">Status</th>
+                <td data-th-text="${active ? 'Active' : 'Inactive'}"></td>
+              </tr>
+              <tr>
+                <th scope="row">Start - end date</th>
+                <td data-th-text="${startDate + ' - ' + endDate}"></td>
+              </tr>
+              <tr>
+                <th scope="row">Project manager</th>
+                <td>
+                  <a
+                    data-th-href="${projectManagerUser.url}"
+                    data-th-text="${projectManagerUser.fullName}"
+                  ></a>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">Division</th>
+                <td data-th-text="${division}"></td>
+              </tr>
+              <tr>
+                <th scope="row">Department</th>
+                <td data-th-text="${department}"></td>
+              </tr>
+              <tr data-th-if="${partners}">
+                <th scope="row">Partners</th>
+                <td data-th-text="${partners}"></td>
+              </tr>
+              <tr data-th-if="${totalBudget}">
+                <th scope="row">Total budget</th>
+                <td data-th-text="${totalBudget}"></td>
+              </tr>
+              <tr data-th-if="${fundingSource}">
+                <th scope="row">Funding source</th>
+                <td data-th-text="${fundingSource}"></td>
+              </tr>
+            </tbody>
+          </table>
+          <div data-portal-region="right">
+            <div
+              data-th-if="${rightRegion}"
+              data-th-each="component : ${rightRegion.components}"
+              data-th-remove="tag"
+            >
+              <div
+                data-portal-component="${component.path}"
+                data-th-remove="tag"
+              ></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

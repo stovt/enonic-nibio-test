@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title data-th-text="${title}"></title>
+  </head>
+  <body class="container" data-portal-component-type="page">
+    <div class="text-center py-2">
+      <img
+        class="rounded mx-auto d-block"
+        data-th-src="${portal.imageUrl({'_id=' + photo, '_scale=width(500)'})}"
+        data-th-alt-title="${fullName}"
+      />
+      <div>
+        <h3 class="py-2" data-th-text="${fullName}"></h3>
+        <h5 data-th-text="${position}"></h5>
+        <a data-th-href="${'tel:' + phone}" data-th-text="${phone}"></a>
+        <br />
+        <a data-th-href="${'mailto:' + email}" data-th-text="${email}"></a>
+      </div>
+    </div>
+    <h5 data-th-if="${projects.size}">My projects</h5>
+    <div class="row py-2" data-th-if="${projects.size}">
+      <div
+        class="col-xs-12 col-sm-6 col-md-4 card-deck pb-4"
+        data-th-each="project : ${projects}"
+      >
+        <div class="card">
+          <img
+            class="card-img-top"
+            data-th-src="${portal.imageUrl({'_id=' + project.photo, '_scale=width(200)'})}"
+            data-th-alt-title="${project.title}"
+          />
+          <div class="card-body">
+            <h5 class="card-title" data-th-text="${project.title}"></h5>
+            <p
+              class="card-text text-primary"
+              data-th-text="${project.division}"
+            ></p>
+            <p class="card-text" data-th-text="${project.intro}"></p>
+            <a class="stretched-link" data-th-href="${project.contentUrl}"></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title data-th-text="${title}"></title>
+  </head>
+  <body class="container" data-portal-component-type="page">
+    <form class="form-inline justify-content-center py-2" data-th-action="${contentUrl}">
+      <ul class="nav">
+        <li class="nav-item  mr-2 align-items-center" style="display: flex;">
+          FILTER
+        </li>
+        <li class="nav-item form-inline mr-2">
+          <div class="form-group">
+            <label for="yearFrom" class="sr-only">From</label>
+            <input 
+              type="text" 
+              class="form-control" 
+              id="yearFrom" 
+              name="yearFrom" 
+              placeholder="FROM"
+              data-th-value=${filters.yearFrom}
+            >
+          </div>
+          <div class="form-group">
+            <label for="yearTo" class="sr-only">To</label>
+            <input 
+              type="text" 
+              class="form-control" 
+              id="yearTo" 
+              name="yearTo" 
+              placeholder="TO"
+              data-th-value=${filters.yearTo}
+            >
+          </div>
+        </li>
+        <li class="nav-item form-inline mr-2">
+          <select class="form-control" name="division">
+            <option value="">Division</option>
+            <option 
+              data-th-each="division : ${divisions}" 
+              data-th-value="${division.id}" 
+              data-th-text="${division.title}"
+              data-th-selected="${filters.division == division.id}"
+            >
+            </option>
+          </select>
+        </li>
+        <li class="nav-item form-inline mr-2">
+          <select class="form-control" name="department">
+            <option value="" selected>Department</option>
+            <option 
+              data-th-each="department : ${departments}" 
+              data-th-value="${department.id}" 
+              data-th-text="${department.title}"
+              data-th-selected="${filters.department == department.id}"
+            >
+            </option>
+          </select>
+        </li>
+        <li class="nav-item form-inline">
+          <button type="submit" class="btn btn-primary">OK</button>
+        </li>
+      </ul>
+    </form>
+    <ul class="nav justify-content-center py-2">
+      <li class="nav-item  mr-2 align-items-center" style="display: flex;">
+        SORTER
+      </li>
+      <li class="nav-item">
+        <a
+          class="nav-link" 
+          data-th-href="${sortTitleUrl}" 
+          data-th-text="${sortTitleName}"
+        ></a>
+      </li>
+      <li class="nav-item">
+        <a
+          class="nav-link" 
+          data-th-href="${sortEndingUrl}" 
+          data-th-text="${sortEndingName}"
+        ></a>
+      </li>
+      <li class="nav-item">
+        <a
+          class="nav-link" 
+          data-th-href="${sortLastUpdateUrl}" 
+          data-th-text="${sortLastUpdateName}"
+        ></a>
+      </li>
+    </ul>
+    <div class="row py-2">
+      <div
+        class="col-xs-12 col-sm-6 col-md-4 card-deck pb-4"
+        data-th-each="project : ${projects}"
+      >
+        <div class="card">
+          <img
+            class="card-img-top"
+            data-th-src="${portal.imageUrl({'_id=' + project.photo, '_scale=width(200)'})}"
+            data-th-alt-title="${project.title}"
+          />
+          <div class="card-body">
+            <h5 class="card-title" data-th-text="${project.title}"></h5>
+            <p
+              class="card-text text-primary"
+              data-th-text="${project.division}"
+            ></pf>
+            <p class="card-text" data-th-text="${project.intro}"></p>
+            <a class="stretched-link" data-th-href="${project.contentUrl}"></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav data-th-if="${projects.size}">
+      <ul class="pagination justify-content-center">
+        <div data-th-each="page : ${pages}" data-th-remove="tag">
+          <li class="page-item" data-th-if="${!page.disabled and !page.active}">
+            <a
+              class="page-link"
+              data-th-href="${page.url}"
+              data-th-text="${page.title}"
+            ></a>
+          </li>
+          <li class="page-item disabled" data-th-if="${page.disabled}">
+            <span class="page-link" data-th-text="${page.title}"></span>
+          </li>
+          <li class="page-item active" data-th-if="${page.active}">
+            <span class="page-link" data-th-text="${page.title}"> </span>
+          </li>
+        </div>
+      </ul>
+    </nav>
+  </body>
+</html>

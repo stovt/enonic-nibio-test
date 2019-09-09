@@ -1,0 +1,31 @@
+<content-type>
+  <display-name>Person</display-name>
+  <display-name-expression>${firstName} ${lastName}</display-name-expression>
+  <super-type>base:structured</super-type>
+  <form>
+    <input type="ImageSelector" name="photo">
+      <label>Photo</label>
+      <occurrences minimum="1" maximum="1"/>
+    </input>
+    <input type="TextLine" name="firstName">
+      <label>First Name</label>
+      <occurrences minimum="1" maximum="1"/>
+    </input>
+    <input type="TextLine" name="lastName">
+      <label>Last Name</label>
+      <occurrences minimum="1" maximum="1"/>
+    </input>
+    <input type="TextLine" name="position">
+      <label>Position</label>
+      <occurrences minimum="1" maximum="1"/>
+    </input>
+    <input type="TextLine" name="phone">
+      <label>Phone Number</label>
+      <occurrences minimum="1" maximum="1"/>
+    </input>
+    <input type="TextLine" name="email">
+      <label>Email</label>
+      <occurrences minimum="1" maximum="1"/>
+    </input>
+  </form>
+</content-type>

@@ -1,0 +1,22 @@
+<div>
+  <h3 class="text-center pb-2">Last News</h3>
+  <div class="row">
+    <div
+      class="col-xs-12 col-sm-6 col-md-3 card-deck pb-4"
+      data-th-each="newsItem : ${news}"
+    >
+      <div class="card">
+        <img
+          class="card-img-top"
+          data-th-src="${portal.imageUrl({'_id=' + newsItem.photo, '_scale=width(200)'})}"
+          data-th-alt-title="${newsItem.title}"
+        />
+        <div class="card-body">
+          <h5 class="card-title" data-th-text="${newsItem.title}"></h5>
+          <p class="card-text" data-th-text="${newsItem.intro}"></p>
+          <a class="stretched-link" data-th-href="${newsItem.contentUrl}"></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

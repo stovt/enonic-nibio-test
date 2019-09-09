@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <div
+      data-th-each="headBeginItem : ${pageContributions.headBegin}"
+      data-th-utext="${headBeginItem}"
+      data-th-remove="tag"
+    ></div>
+    <title>Search Results</title>
+  </head>
+  <body class="container" data-portal-component-type="page">
+    <div
+      data-th-each="bodyBeginItem : ${pageContributions.bodyBegin}"
+      data-th-utext="${bodyBeginItem}"
+      data-th-remove="tag"
+    ></div>
+    <h3
+      data-th-text="${portal.localize({'_key=search.found.' + !!(projects.size or news.size or persons.size),'_locale=en'})}"
+    ></h3>
+    <h4 data-th-if="${projects.size}">Projects</h4>
+    <div class="row py-2" data-th-if="${projects.size}">
+      <div
+        class="col-xs-12 col-sm-6 col-md-4 card-deck pb-4"
+        data-th-each="project : ${projects}"
+      >
+        <div class="card">
+          <img
+            class="card-img-top"
+            data-th-src="${portal.imageUrl({'_id=' + project.photo, '_scale=width(200)'})}"
+            data-th-alt-title="${project.title}"
+          />
+          <div class="card-body">
+            <h5 class="card-title" data-th-text="${project.title}"></h5>
+            <p
+              class="card-text text-primary"
+              data-th-text="${project.division}"
+            ></p>
+            <p class="card-text" data-th-text="${project.intro}"></p>
+            <a class="stretched-link" data-th-href="${project.contentUrl}"></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <h4 data-th-if="${news.size}">News</h4>
+    <div class="row py-2" data-th-if="${news.size}">
+      <div
+        class="col-xs-12 col-sm-6 col-md-4 card-deck pb-4"
+        data-th-each="newsItem : ${news}"
+      >
+        <div class="card">
+          <img
+            class="card-img-top"
+            data-th-src="${portal.imageUrl({'_id=' + newsItem.photo, '_scale=width(200)'})}"
+            data-th-alt-title="${newsItem.title}"
+          />
+          <div class="card-body">
+            <h5 class="card-title" data-th-text="${newsItem.title}"></h5>
+            <p class="card-text" data-th-text="${newsItem.intro}"></p>
+            <a class="stretched-link" data-th-href="${newsItem.contentUrl}"></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <h4 data-th-if="${persons.size}">Persons</h4>
+    <div class="row py-2" data-th-if="${persons.size}">
+      <div
+        class="col-xs-12 col-sm-6 col-md-4 card-deck pb-4"
+        data-th-each="person : ${persons}"
+      >
+        <div class="card">
+          <img
+            class="card-img-top"
+            data-th-src="${portal.imageUrl({'_id=' + person.photo, '_scale=width(200)'})}"
+            data-th-alt-title="${person.fullName}"
+          />
+          <div class="card-body">
+            <h5 class="card-title" data-th-text="${person.fullName}"></h5>
+            <p class="card-text" data-th-text="${person.position}"></p>
+            <p class="card-text">
+              <a
+                data-th-href="${'tel:' + person.phone}"
+                data-th-text="${person.phone}"
+              ></a>
+              <br />
+              <a
+                data-th-href="${'mailto:' + person.email}"
+                data-th-text="${person.email}"
+              ></a>
+            </p>
+            <a class="stretched-link" data-th-href="${person.contentUrl}"></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

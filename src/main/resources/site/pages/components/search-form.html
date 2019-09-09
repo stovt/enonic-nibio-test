@@ -1,0 +1,28 @@
+<div class="row py-4">
+  <div class="col-md-12">
+    <form
+      class="row"
+      data-th-action="${portal.serviceUrl({'_service=search'})}"
+    >
+      <div class="col-12 col-sm-auto pr-sm-0">
+        <select class="form-control form-control-lg" name="f">
+          <option value="all" selected>Nibio</option>
+          <option value="projects">Projects</option>
+          <option value="new">News</option>
+          <option value="persons">Persons</option>
+        </select>
+      </div>
+      <div class="col-12 col-sm pl-sm-0 pr-sm-0">
+        <input
+          type="text"
+          class="form-control form-control-lg"
+          name="q"
+          placeholder="Use quotation marks to search for exact word or phrase"
+        />
+      </div>
+      <div class="col-12 col-sm-auto pl-sm-0">
+        <button type="submit" class="btn btn-lg btn-success">Search</button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,17 @@
+<part>
+  <display-name>Text box</display-name>
+  <form>
+    <input type="ComboBox" name="backgroundColor">
+      <label>Type</label>
+      <occurrences minimum="1" maximum="1"/>
+      <config>
+        <option value="bg-primary">Info</option>
+        <option value="bg-danger">Warning</option>
+      </config>
+      <default>bg-primary</default>
+    </input>
+    <input type="HtmlArea" name="body">
+      <label>Body</label>
+    </input>
+  </form>
+</part>

@@ -1,0 +1,5 @@
+<content-type>
+  <display-name>Division</display-name>
+  <super-type>base:structured</super-type>
+  <form />
+</content-type>

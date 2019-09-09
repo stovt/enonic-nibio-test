@@ -1,0 +1,8 @@
+<page>
+  <display-name>Project Regions</display-name>
+  <config/>
+  <regions>
+    <region name="left"/>
+    <region name="right"/>
+  </regions>
+</page>

@@ -1,0 +1,13 @@
+Private-Package=*;-split-package\:\=merge-first
+Bundle-Name=Vanilla Example
+X-Source-Paths=/home/sergey/projects/nibio/src/main/resources,/home/sergey/projects/nibio/build/resources/main
+Import-Package=*;resolution\:\=optional
+-dsannotations=*
+X-Capability=
+X-Vendor-Name=null
+Bundle-SymbolicName=nibio
+X-Bundle-Type=application
+X-System-Version=[7.0,8)
+-removeheaders=Require-Capability,Include-Resource
+X-Vendor-Url=null
+-nouses=true

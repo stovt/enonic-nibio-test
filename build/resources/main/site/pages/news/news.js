@@ -2,7 +2,6 @@ var contentLib = require('/lib/xp/content');
 var portal = require('/lib/xp/portal');
 var thymeleaf = require('/lib/thymeleaf');
 var nibioUtils = require("/lib/nibioUtils");
-var util = require("/lib/util");
 
 exports.get = function (req) {
   var view = resolve('news.html');

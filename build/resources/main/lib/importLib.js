@@ -2,33 +2,39 @@ var contentLib = require('/lib/xp/content');
 var portalLib = require('/lib/xp/portal');
 var common = require('/lib/xp/common');
 var authLib = require('/lib/xp/auth');
-var util = require('/lib/util');
 
 exports.importPerson = importPerson;
 
 
 function importPerson(params) {
- /* var user = authLib.createUser({
-    idProvider: 'system',
-    name:  common.sanitize(params.firstName + ' ' + params.lastName),
-    displayName: params.firstName + ' ' + params.lastName,
-    email: params.email
+  var systemUserResult = authLib.findUsers({
+    start: 0,
+    count: 1,
+    query: "email = '" + params.email + "'",
+    includeProfile: true
   });
 
-  util.log(user);
-*/
+  if (!systemUserResult.count) {
+    var systemUser = authLib.createUser({
+      idProvider: 'system',
+      name:  common.sanitize(params.firstName + ' ' + params.lastName),
+      displayName: params.firstName + ' ' + params.lastName,
+      email: params.email
+    });
+  
+    authLib.changePassword({
+      userKey: systemUser.key,
+      password: params.password
+    });
+  
+    authLib.addMembers('role:cms.cm.app', [systemUser.key]);
+    authLib.addMembers('role:system.admin.login', [systemUser.key]);
+  }  
+
   var photoResult;
   var parentPath;
 
   function modifyEditor(person) {
-    /*
-    person._name = (person.data.firstName !== params.firstName || person.data.lastName !== params.lastName)
-      ? common.sanitize(params.firstName + ' ' + params.lastName)
-      : person._name;
-    person.displayName = (person.data.firstName !== params.firstName || person.data.lastName !== params.lastName)
-      ? params.firstName + ' ' + params.lastName
-      : person._name;
-    */
     person.data.firstName = person.data.firstName !== params.firstName ? params.firstName : person.data.firstName;
     person.data.lastName = person.data.lastName !== params.lastName ? params.lastName : person.data.lastName;
     person.data.position = person.data.position !== params.position ? params.position : person.data.position;
@@ -37,7 +43,7 @@ function importPerson(params) {
 
     var photoStream = portalLib.getMultipartStream('photo');
     var photo = portalLib.getMultipartItem('photo');
-    if (photo) {    
+    if (photo) {
       var photoNameArr = photo.fileName.split('.');
       photoNameArr[2] = "." + photoNameArr[1];
       photoNameArr[1] = "-" + new Date().getTime();
@@ -54,7 +60,6 @@ function importPerson(params) {
 
     return person;
   }
-
 
   var searchResult = contentLib.query({
     start: 0,
@@ -91,9 +96,42 @@ function importPerson(params) {
     displayName: params.firstName + ' ' + params.lastName,
     contentType: app.name + ':person',
     requireValid: false,
-    data: params
+    data: {
+      firstName: params.firstName,
+      lastName: params.lastName,
+      position: params.position,
+      phone: params.phone,
+      email: params.email
+    }
   });
 
+
+  if (!systemUserResult.conut) {
+    function systemProfileEditor(profile) {
+      profile.id = personResult._id;
+      return profile;
+    }
+  
+    var modifiedSystemProfile = authLib.modifyProfile({
+      key: systemUser.key,
+      editor: systemProfileEditor
+    });
+  
+    var setPersonPermissionsFlag = contentLib.setPermissions({
+      key: personResult._id,
+      inheritPermissions: false,
+      overwriteChildPermissions: true,
+      permissions: [
+      {
+        principal: systemUser.key,
+        allow: ['READ', 'CREATE', 'PUBLISH', 'MODIFY', 'DELETE', 'READ_PERMISSIONS', 'WRITE_PERMISSIONS'],
+        deny: []
+      }]
+    });
+
+    if (!setPersonPermissionsFlag) return false;
+  }
+  
   parentPath = personResult._path;
 
   var modifyResult = contentLib.modify({

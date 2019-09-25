@@ -15,7 +15,7 @@ exports.post = function (req) {
   if (!params.position) missingParams.push("'position'");
   if (!params.phone) missingParams.push("'phone'");
   if (!params.email) missingParams.push("'email'");
-  // if (!params.password) missingParams.push("'password'");
+  if (!params.password) missingParams.push("'password'");
 
   if (missingParams.length) {
     message += missingParams.join(', ');
